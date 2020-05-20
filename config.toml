@@ -6,7 +6,7 @@ theme = "terminal"
 [params]
   fullWidthTheme = false
   centerTheme = true
-  themeColor = "blue"
+  themeColor = "green"
 
 [permalinks]
   posts = "/:title/"
