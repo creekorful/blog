@@ -8,6 +8,9 @@ theme = "terminal"
   centerTheme = true
   themeColor = "blue"
 
+[permalinks]
+  posts = "/:title/"
+
 [languages]
   [languages.en]
     languageName = "English"
