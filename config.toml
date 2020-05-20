@@ -2,6 +2,7 @@ baseURL = "https://blog.creekorful.com"
 languageCode = "en-us"
 title = "Aloïs Micard | Tech blog"
 theme = "terminal"
+disqusShortname = "creekorful-me"
 
 [params]
   fullWidthTheme = false
