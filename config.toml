@@ -43,4 +43,4 @@ theme = "terminal"
       [[languages.en.menu.main]]
         identifier = "gaia-rocket-program"
         name = "Gaia Rocket Program"
-        url = "https://wwww.gaiarocketprogram.fr"
+        url = "https://www.gaiarocketprogram.fr"
