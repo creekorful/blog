@@ -1,0 +1,35 @@
+baseURL = "https://blog-beta.creekorful.com"
+languageCode = "en-us"
+title = "Aloïs Micard | Tech blog"
+theme = "terminal"
+
+[params]
+  fullWidthTheme = false
+  centerTheme = true
+  themeColor = "blue"
+
+[languages]
+  [languages.en]
+    languageName = "English"
+    title = "Aloïs Micard"
+    subtitle = "Tech Blog"
+    owner = "Aloïs Micard"
+    keywords = ""
+    copyright = ""
+    menuMore = "Show more"
+    readMore = "Read more"
+    readOtherPosts = "Read other posts"
+
+    [languages.en.params.logo]
+      logoText = "Aloïs Micard | Tech blog"
+      logoHomeLink = "/"
+
+    [languages.en.menu]
+      [[languages.en.menu.main]]
+        identifier = "about"
+        name = "About"
+        url = "/about"
+      [[languages.en.menu.main]]
+        identifier = "showcase"
+        name = "Showcase"
+        url = "/showcase"
