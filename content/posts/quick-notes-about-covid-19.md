@@ -2,6 +2,7 @@
 title = "Quick notes about Covid 19"
 date = "2020-03-19"
 author = "Aloïs Micard"
+authorTwitter = "" #do not include @
 cover = ""
 description = ""
 showFullContent = false

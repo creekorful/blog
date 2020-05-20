@@ -2,6 +2,7 @@
 title = "ClassLoader & memory leaks: a Java love story"
 date = "2020-03-18"
 author = "Aloïs Micard"
+authorTwitter = "" #do not include @
 cover = ""
 tags = ["Java"]
 keywords = ["", ""]
