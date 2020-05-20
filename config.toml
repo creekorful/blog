@@ -26,10 +26,18 @@ theme = "terminal"
 
     [languages.en.menu]
       [[languages.en.menu.main]]
-        identifier = "about"
-        name = "About"
-        url = "/about"
+        identifier = "github"
+        name = "Github"
+        url = "https://github.com/creekorful"
       [[languages.en.menu.main]]
-        identifier = "showcase"
-        name = "Showcase"
-        url = "/showcase"
+        identifier = "linkedin"
+        name = "Linkedin"
+        url = "https://www.linkedin.com/in/creekorful"
+      [[languages.en.menu.main]]
+        identifier = "500px"
+        name = "500px"
+        url = "https://500px.com/creekorful"
+      [[languages.en.menu.main]]
+        identifier = "gaia-rocket-program"
+        name = "Gaia Rocket Program"
+        url = "https://gaiarocketprogram.fr"
