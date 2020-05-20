@@ -10,7 +10,6 @@ theme = "terminal"
 
 [permalinks]
   posts = "/:filename/"
-  tags = "/tag/:slug/"
 
 [languages]
   [languages.en]
