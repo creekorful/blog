@@ -9,7 +9,7 @@ theme = "terminal"
   themeColor = "green"
 
 [permalinks]
-  posts = "/:title/"
+  posts = "/:filename/"
   tags = "/tag/:slug/"
 
 [languages]
