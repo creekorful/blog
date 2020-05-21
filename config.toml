@@ -3,6 +3,7 @@ languageCode = "en-us"
 title = "Aloïs Micard | Tech blog"
 theme = "terminal"
 disqusShortname = "creekorful-me"
+googleAnalytics = "UA-100732589-2"
 
 [params]
   fullWidthTheme = false
