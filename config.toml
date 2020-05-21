@@ -4,6 +4,7 @@ title = "Aloïs Micard | Tech blog"
 theme = "terminal"
 disqusShortname = "creekorful-me"
 googleAnalytics = "UA-100732589-2"
+disableAliases = true
 
 [params]
   fullWidthTheme = false
@@ -11,7 +12,7 @@ googleAnalytics = "UA-100732589-2"
   themeColor = "green"
 
 [permalinks]
-  posts = "/:filename/"
+  posts = "/:year/:month/:filename/"
 
 [languages]
   [languages.en]

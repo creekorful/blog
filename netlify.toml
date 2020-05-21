@@ -1,2 +1,93 @@
 [context.production.environment]
   HUGO_VERSION = "0.71.0"
+
+[[redirects]]
+  from = "/quick-notes-about-covid-19/"
+  to = "/2020/03/quick-notes-about-covid-19/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/classloader-and-memory-leaks/"
+  to = "/2020/03/classloader-and-memory-leaks/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/docker-swarm-is-not-dead-yet/"
+  to = "/2020/02/docker-swarm-is-not-dead-yet/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/wks-workspace-organizer/"
+  to = "/2020/02/wks-workspace-organizer/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/making-product-is-not-even-half-of-the-path-to-success/"
+  to = "/2020/01/making-product-is-not-even-half-of-the-path-to-success/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/harbor-private-docker-registry/"
+  to = "/2020/01/harbor-private-docker-registry/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/how-to-expose-traefik-2-dashboard-securely-docker-swarm/"
+  to = "/2020/01/how-to-expose-traefik-2-dashboard-securely-docker-swarm/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/lets-build-a-simple-quotes-application/"
+  to = "/2020/01/lets-build-a-simple-quotes-application/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/taking-new-year-resolutions-seriously/"
+  to = "/2020/01/taking-new-year-resolutions-seriously/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/pimp-your-phone-like-never-before/"
+  to = "/2019/12/pimp-your-phone-like-never-before/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/how-to-install-traefik-2-docker-swarm/"
+  to = "/2019/10/how-to-install-traefik-2-docker-swarm/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/go-library-maven-pom-parser/"
+  to = "/2019/10/go-library-maven-pom-parser/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/taking-screenshot-of-your-code/"
+  to = "/2019/10/taking-screenshot-of-your-code/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/supervisor-host-management/"
+  to = "/2019/09/supervisor-host-management/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/setup-qt-with-clion-easily/"
+  to = "/2019/08/setup-qt-with-clion-easily/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/using-cdi-2-0-in-a-java-se-application/"
+  to = "/2019/08/using-cdi-2-0-in-a-java-se-application/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/building-fast-modern-web-crawler/"
+  to = "/2019/08/building-fast-modern-web-crawler/"
+  status = 301
+  force = true
+[[redirects]]
+  from = "/terminews/"
+  to = "/2019/07/terminews/"
+  status = 301
+  force = true
