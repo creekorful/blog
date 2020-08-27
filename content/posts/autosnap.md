@@ -76,4 +76,6 @@ the build packages, the version, etc... and therefore ease the life of package m
 
 Current languages supported by Autosnap are: [Go, Rust] (new languages will be supported soon).
 
+The source code of autosnap is available [here](https://github.com/creekorful/autosnap).
+
 Happy hacking!
