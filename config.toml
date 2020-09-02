@@ -1,4 +1,4 @@
-baseURL = "https://blog.creekorful.com"
+baseURL = "/"
 languageCode = "en-us"
 title = "Aloïs Micard | Tech blog"
 theme = "terminal"
