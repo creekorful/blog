@@ -8,6 +8,7 @@ tags = ["My Projects", "Golang", "CLI"]
 keywords = ["", ""]
 description = ""
 showFullContent = false
+draft = true
 +++
 
 Don't you have many Git repositories laying everywhere on your disk? Isn't it a mess?

@@ -8,6 +8,7 @@ tags = []
 keywords = ["", ""]
 description = ""
 showFullContent = false
+draft = true
 +++
 
 It's been 2 months since my last post. 
