@@ -24,7 +24,7 @@ Access: (4755/-rwsr-xr-x)  Uid: (    0/    root)   Gid: (    0/    root)
 ```
 
 will be executed as root (Uid 0), no matter what the current user is.
-This feature allows un-privileged user to change their password by editing `/etc/shadow` (root owner) using passwd.
+This allows un-privileged user to change their password by editing `/etc/shadow` (root owner) using passwd.
 
 # How setuid may be exploited?
 
@@ -40,13 +40,12 @@ Let's see how we can exploit a badly designed setuid program to gain root access
 # Exploiting a setuid executable
 
 They are multiple ways to exploit an executable (buffer overflow, stack overflow, etc...)
-in this section we will focus on one of the most widely spread yet easy to use
-vulnerability: path injection.
+in this section we will focus on one of the easiest vulnerability to exploit: path injection.
 
 ## Path injection
 
-Path injection is a widely spread vulnerability. It happens when an executable refer to 
-another executable without using the full path to it. Let's take an example:
+Path injection is a common vulnerability. It happens when an executable refer to
+another one without using the full path to it. Let's take an example:
 
 ```sh
 $ cat apt-updater.c
@@ -62,11 +61,12 @@ int main() {
 }
 ```
 
-this executable has been designed by a sysadmin to allows user to update the server packages to their latest version (very bad practice btw).
+this executable has been designed by a sysadmin to allows non-root users to update the server packages
+to their latest version (very bad practice btw).
 
 While it may look simple & secure, it has an **important** vulnerability: a path injection vulnerability:
 
-It uses the [apt](https://manpages.debian.org/stretch/apt/apt.8.fr.html) 
+It uses the [apt](https://manpages.debian.org/buster/apt/apt.8.en.html)
 executable but doesn't invoke directly `/usr/bin/apt` but rather relies on apt to be in the [PATH](https://en.wikipedia.org/wiki/PATH_(variable)).
 
 Let's see how we can use this at our advantages by polluting the PATH.
@@ -74,7 +74,7 @@ Let's see how we can use this at our advantages by polluting the PATH.
 ### How the PATH work exactly?
 
 The PATH variable is used to lookup executables when issuing command. It is composed of directories to include
-while searching, separated by a ':'.
+while searching, separated by a semicolon ':'.
 
 For example: `/usr/local/bin:/usr/bin:/bin` means that executables will be searched in the following directories:
 
@@ -88,7 +88,7 @@ be searched in the others directories.
 ### Exploiting the vulnerability
 
 Since the executable relies on the PATH to lookup apt location, we can simply create a dummy `apt` executable script
-that will just open a shell (/bin/sh) and place it into a directory that will be in the PATH.
+that will open a shell (/bin/sh) and place it in a directory that will be in the PATH.
 
 ```sh
 $ mkdir /tmp/foo # create random directory to put the script
@@ -99,10 +99,10 @@ $ PATH=/tmp/foo:$PATH /usr/local/bin/apt-updater # override the PATH variable to
 uid=0(root) gid=1001(creekorful) groups=1001(creekorful)
 ```
 
-When the OS has looked up the apt executable it has search in the following location:
+When the OS has look up the apt executable it searches in the following location:
 
 - /tmp/foo
-- [...]
+[rest of the path]
 
 since we have appended /tmp/foo at first, the OS was able to find the apt executable in it
 and has executed it (with root privileges since they are propagated). 
@@ -135,7 +135,8 @@ and may have been badly designed.
 It is fairly easy to determinate if the executable is vulnerable: one could simply look if it calls
 other executables without using full path.
 
-This is done easily by using [strings](https://linux.die.net/man/1/strings).
+This is done easily by using [strings](https://manpages.debian.org/buster/binutils-common/strings.1.en.html)
+which is a program used to extract printable characters from a file.
 
 ```sh
 $ strings /usr/local/bin/apt-updater
