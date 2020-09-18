@@ -6,9 +6,13 @@ authorTwitter = "" #do not include @
 cover = ""
 tags = ["Security", "Privilege Escalation"]
 keywords = ["", ""]
-description = ""
+description = "How to gain root access by exploiting wrongly designed setuid executables."
 showFullContent = false
 +++
+
+This blog post is part of a series around [security](/tags/security) & [privilege escalation](/tags/privilege-escalation).
+
+---
 
 [Setuid](https://en.wikipedia.org/wiki/Setuid) is a Unix access rights flag that allow users to run an executable 
 with the file system permissions of the executable's owner.
@@ -64,14 +68,14 @@ int main() {
 this executable has been designed by a sysadmin to allows non-root users to update the server packages
 to their latest version (very bad practice btw).
 
-While it may look simple & secure, it has an **important** vulnerability: a path injection vulnerability:
+While it may look simple & secure, it has a **serious** vulnerability.
 
 It uses the [apt](https://manpages.debian.org/buster/apt/apt.8.en.html)
 executable but doesn't invoke directly `/usr/bin/apt` but rather relies on apt to be in the [PATH](https://en.wikipedia.org/wiki/PATH_(variable)).
 
 Let's see how we can use this at our advantages by polluting the PATH.
 
-### How the PATH work exactly?
+### How does the PATH work exactly?
 
 The PATH variable is used to lookup executables when issuing command. It is composed of directories to include
 while searching, separated by a semicolon ':'.
@@ -102,7 +106,8 @@ uid=0(root) gid=1001(creekorful) groups=1001(creekorful)
 When the OS has look up the apt executable it searches in the following location:
 
 - /tmp/foo
-[rest of the path]
+
+*[rest of the path]*
 
 since we have appended /tmp/foo at first, the OS was able to find the apt executable in it
 and has executed it (with root privileges since they are propagated). 

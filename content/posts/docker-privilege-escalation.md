@@ -6,9 +6,13 @@ authorTwitter = "" #do not include @
 cover = ""
 tags = ["Docker", "Security", "Privilege Escalation"]
 keywords = ["", ""]
-description = ""
+description = "How to gain root access by using a Docker engine running with default configuration."
 showFullContent = false
 +++
+
+This blog post is part of a series around [security](/tags/security) & [privilege escalation](/tags/privilege-escalation).
+
+---
 
 I have done a little security audit on a friend VPS last week, he was providing Docker runtime
 to some people, with SSH access, and wanted to know if his setup was secure.
@@ -55,7 +59,7 @@ drwx------  6 root root  4096 Aug 25 09:14 .
 -rw-r--r--  1 root root  5774 Aug 25 09:55 .bash_history
 ```
 
-Since Docker has SUID bit set, we were able to mount the whole host disk
+Since Docker has setuid bit set, we were able to mount the whole host disk
 inside the /mnt/root partition (*-v /:/mnt/root*). And since we are root, we can list */root*.
 
 Now let's try to mount again the host filesystem
