@@ -47,3 +47,7 @@ disableAliases = true
         identifier = "gaia-rocket-program"
         name = "Gaia Rocket Program"
         url = "https://www.gaiarocketprogram.fr"
+      [[languages.en.menu.main]]
+        identifier = "website"
+        name = "Website"
+        url = "https://creekorful.dev"
