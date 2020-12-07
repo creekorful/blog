@@ -1,4 +1,4 @@
-+++
++++ 
 title = "How to install Traefik 2.x on a Docker Swarm"
 date = "2019-10-21"
 author = "Aloïs Micard"
@@ -42,7 +42,7 @@ version: '3'
 
 services:
   reverse-proxy:
-    image: traefik:v2.0.2
+    image: traefik:v2.3.4
     command:
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
@@ -188,14 +188,17 @@ version: '3'
 
 services:
   reverse-proxy:
-    image: traefik:v2.0.2
+    image: traefik:v2.3.4
     command:
+      # Docker swarm configuration
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=traefik-public"
+      # Configure entrypoint
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+      # SSL configuration
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.email=user@domaine.com"
@@ -307,21 +310,17 @@ reserved TLD used for local area network)
 
 ## Bonus: Create an automatic HTTPS redirect
 
-If you want to redirect all HTTP traffic to HTTPS it can be done by easily by using a Middleware. Just add the following
-labels to to the Traefik configuration file.
+If you want to redirect all HTTP traffic to HTTPS it can be done by easily:
 
 ```yaml
-labels:
-  - "traefik.enable=true"
-  - "traefik.http.services.traefik.loadbalancer.server.port=888" # required by swarm but not used.
-  - "traefik.http.routers.http-catchall.rule=hostregexp(`{host:.+}`)"
-  - "traefik.http.routers.http-catchall.entrypoints=web"
-  - "traefik.http.routers.http-catchall.middlewares=redirect-to-https@docker"
-  - "traefik.http.middlewares.redirect-to-https.redirectscheme.scheme=https"
+command:
+  ...
+  # Global HTTP -> HTTPS
+  - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+  - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
 ```
 
-It will create a router named *http-catchall* that will intercept all HTTP request (using the hostregexp) and will
-forward it to the router named redirect-to-https. This router will perform a redirection to the HTTPS scheme.
+It will create a global redirection from all HTTP traffic to HTTPS.
 
 ---
 
@@ -332,18 +331,24 @@ version: '3'
 
 services:
   reverse-proxy:
-    image: traefik:v2.0.2
+    image: traefik:v2.3.4
     command:
+      # Docker swarm configuration
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=traefik-public"
+      # Configure entrypoint
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+      # SSL configuration
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.email=user@domaine.com"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/letsencrypt/acme.json"
+      # Global HTTP -> HTTPS
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
     ports:
       - 80:80
       - 443:443

@@ -1,4 +1,4 @@
-+++
++++ 
 title = "How to expose Traefik 2.x dashboard securely on Docker Swarm"
 date = "2020-01-12"
 author = "Aloïs Micard"
@@ -38,18 +38,25 @@ version: '3'
 
 services:
   reverse-proxy:
-    image: traefik:v2.0.2
+    image: traefik:v2.3.4
     command:
+      # Docker swarm configuration
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=traefik-public"
+      # Configure entrypoint
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+      # SSL configuration
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.email=user@domaine.com"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/letsencrypt/acme.json"
+      # Global HTTP -> HTTPS
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      # Enable dashboard
       - "--api.dashboard=true"
     ports:
       - 80:80
@@ -98,18 +105,25 @@ version: '3'
 
 services:
   reverse-proxy:
-    image: traefik:v2.0.2
+    image: traefik:v2.3.4
     command:
+      # Docker swarm configuration
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=traefik-public"
+      # Configure entrypoint
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+      # SSL configuration
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.email=user@domaine.com"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/letsencrypt/acme.json"
+      # Global HTTP -> HTTPS
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      # Enable dashboard
       - "--api.dashboard=true"
     ports:
       - 80:80
@@ -169,18 +183,25 @@ version: '3'
 
 services:
   reverse-proxy:
-    image: traefik:v2.0.2
+    image: traefik:v2.3.4
     command:
+      # Docker swarm configuration
       - "--providers.docker.endpoint=unix:///var/run/docker.sock"
       - "--providers.docker.swarmMode=true"
       - "--providers.docker.exposedbydefault=false"
       - "--providers.docker.network=traefik-public"
+      # Configure entrypoint
       - "--entrypoints.web.address=:80"
       - "--entrypoints.websecure.address=:443"
+      # SSL configuration
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge=true"
       - "--certificatesresolvers.letsencryptresolver.acme.httpchallenge.entrypoint=web"
       - "--certificatesresolvers.letsencryptresolver.acme.email=user@domaine.com"
       - "--certificatesresolvers.letsencryptresolver.acme.storage=/letsencrypt/acme.json"
+      # Global HTTP -> HTTPS
+      - "--entrypoints.web.http.redirections.entryPoint.to=websecure"
+      - "--entrypoints.web.http.redirections.entryPoint.scheme=https"
+      # Enable dashboard
       - "--api.dashboard=true"
     ports:
       - 80:80
