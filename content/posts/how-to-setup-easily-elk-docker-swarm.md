@@ -1,5 +1,5 @@
 +++ 
-title = "How to setup ELK on a Docker Swarm"
+title = "How to setup easily ELK on a Docker Swarm"
 date = "2020-12-07"
 author = "Aloïs Micard"
 authorTwitter = "" #do not include @ 
