@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-I have written an article on the provisioning of a Docker Swarm cluster from scratch ([you can read it here](https://blog.creekorful.com/how-to-provision-a-secure-docker-swarm-cluster-from-scratch)) and I have received a lot of comments stating that docker swarm is dead and that I should be moving to Kubernetes instead.
+I have written an article on the provisioning of a Docker Swarm cluster from scratch and I have received a lot of comments stating that docker swarm is dead and that I should be moving to Kubernetes instead.
 
 # What happened to docker?
 
