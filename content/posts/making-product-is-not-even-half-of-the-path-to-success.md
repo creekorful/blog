@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-As you may already know, I have launched, with a Friend, [an Android application](https://blog.creekorful.com/pimp-your-phone-like-never-before/) to customize phone wallpapers randomly. The development of the app itself only took us 2 months and was quite fun. The release was really exciting and the first feedback from real users was encouraging. However, things didn't go as planned...
+As you may already know, I have launched, with a Friend, [an Android application](https://blog.creekorful.org/pimp-your-phone-like-never-before/) to customize phone wallpapers randomly. The development of the app itself only took us 2 months and was quite fun. The release was really exciting and the first feedback from real users was encouraging. However, things didn't go as planned...
 
 # Referral program failure
 

@@ -11,13 +11,13 @@ showFullContent = false
 +++
 
 This article is part of a series about Docker Swarm. For the first article please
-check [here](https://blog.creekorful.com/how-to-install-traefik-2-docker-swarm/).
+check [here](https://blog.creekorful.org/how-to-install-traefik-2-docker-swarm/).
 
 On this short tutorial you'll learn how to deploy securely the Traefik built-in dashboard with HTTPS support and basic
 authentication system.
 
 This article assume that you have a working Docker Swarm cluster with Traefik running with HTTPS support. If not you can
-following [this article](https://blog.creekorful.com/how-to-install-traefik-2-docker-swarm/) to get started.
+following [this article](https://blog.creekorful.org/how-to-install-traefik-2-docker-swarm/) to get started.
 
 ------
 
@@ -31,7 +31,7 @@ view configured entrypoints, existing routers, services, ...
 ## Enable the Dashboard and the API
 
 Let's take the final docker compose file from
-the [first tutorial](https://blog.creekorful.com/how-to-install-traefik-2-docker-swarm/) and add some instructions:
+the [first tutorial](https://blog.creekorful.org/how-to-install-traefik-2-docker-swarm/) and add some instructions:
 
 ```yaml
 version: '3'
@@ -163,7 +163,7 @@ networks:
 
 Configure the exposure of the Traefik dashboard on the **traefik-ui.local** domain name, using the websecure entrypoint
 with the letsencryptresolver. If you want more information about how to configure these, just check
-my [first blog post about Traefik](https://blog.creekorful.com/how-to-install-traefik-2-docker-swarm/).
+my [first blog post about Traefik](https://blog.creekorful.org/how-to-install-traefik-2-docker-swarm/).
 
 ```yaml
 - "traefik.http.routers.traefik.service=api@internal"

@@ -10,7 +10,7 @@ description = ""
 showFullContent = false
 +++
 
-I used to manage a dozen VPS since many years: Zabbix, Gitlab/Gitlab CI, [private docker registry](https://blog.creekorful.com/2020/01/harbor-private-docker-registry/), 
+I used to manage a dozen VPS since many years: Zabbix, Gitlab/Gitlab CI, [private docker registry](https://blog.creekorful.org/2020/01/harbor-private-docker-registry/), 
 production environment (3 nodes docker swarm cluster), database server (MariaDB & MongoDB), 
 blog server (running [Ghost](https://ghost.org/)), logs collector ([Graylog](https://www.graylog.org/)), etc...
 

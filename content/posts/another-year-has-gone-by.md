@@ -35,7 +35,7 @@ So, what was your favorite time this year?
 
 # Resolutions
 
-For those who remember I'm always trying to set some goals for the year. I've written a [blog post](https://blog.creekorful.com/2020/01/taking-new-year-resolutions-seriously/) last year
+For those who remember I'm always trying to set some goals for the year. I've written a [blog post](https://blog.creekorful.org/2020/01/taking-new-year-resolutions-seriously/) last year
 about this.
 
 Out of the 4 big resolutions I have undertaken, **3** of them has been accomplished, so I'm pretty happy about it!
