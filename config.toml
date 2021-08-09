@@ -40,13 +40,9 @@ disableAliases = true
         name = "Linkedin"
         url = "https://www.linkedin.com/in/creekorful"
       [[languages.en.menu.main]]
-        identifier = "500px"
-        name = "500px"
-        url = "https://500px.com/creekorful"
-      [[languages.en.menu.main]]
         identifier = "website"
         name = "Website"
-        url = "https://creekorful.dev"
+        url = "https://www.creekorful.org"
       [[languages.en.menu.main]]
         identifier = "source-code"
         name = "Blog source code"
