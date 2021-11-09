@@ -77,7 +77,7 @@ Eh! What if we need to 'whitelabelize' our application. :-)
 
 In our scenario, we have the need to [whitelabelize](https://en.wikipedia.org/wiki/White-label_product) our application:
 each `User` will belongs to a `Provider` that will have custom SMTP settings. So when sending email to a user we need to
-configure dynamically the SMTP credentials to use depending on the `$user->provider`.
+configure dynamically the mailer to use the SMTP credentials of `$user->provider`.
 
 **Can Laravel help us doing so?**
 
@@ -93,6 +93,8 @@ Not yet, because Laravel allows us to tweak almost **anything**, so we just need
 Here's a quick visualization of our models:
 
 ```php
+namespace App\Models;
+
 /**
  * @property Provider $provider
  */
@@ -108,11 +110,13 @@ class User extends Model
 For the `User` model there's nothing special: we only link the user to a `Provider`.
 
 ```php
+namespace App\Models;
+
 /**
  * @property array $mail_configuration
  * @property Provider $provider
  */
-class Provider
+class Provider extends Model
 {
     protected $casts = [
         'mail_configuration' => 'encrypted:array'
@@ -125,7 +129,7 @@ class Provider
 }
 ```
 
-The `Provider` model has many `Users` and has a `mail_configuration` field which is encrypted and that will contain all
+The `Provider` model has many `Users` and has a `mail_configuration` field which is encrypted and that will contain
 the SMTP credentials.
 
 ## 2.2. Digging down the internals
@@ -168,12 +172,15 @@ protected function sendToNotifiable($notifiable, $id, $notification, $channel)
 ```
 
 As you can see this method is looking for a driver to use with the `$channel` and finally calls the `send()`
-method. So what we can do is registering a special SMTP driver that will use dynamic SMTP settings. Fortunately
-registering a custom driver is a common use-case and there's a straightforward way.
+method. So what we can do is registering a special SMTP driver that will use dynamic SMTP settings.
+
+Fortunately registering a custom driver is a common use-case and there's a straightforward way.
 
 ## 2.3. Creating a custom MailChannel
 
 ```php
+namespace App\Notifications\Channels;
+
 class ProviderMailChannel extends MailChannel
 {
     public function send($notifiable, Notification $notification)
@@ -187,9 +194,11 @@ class ProviderMailChannel extends MailChannel
 ## 2.4. Registering the ProviderMailChannel
 
 All we need to know is extend (i.e: register a custom driver creator) for the `mail` channel.
-This way when an email is sent it will be sent using the `ProviderMailChannel`.
+This way when an email is sent it will be sent using our `ProviderMailChannel`.
 
 ```php
+namespace App\Providers;
+
 class AppServiceProvider extends ServiceProvider
 {
     public function boot()
@@ -211,6 +220,8 @@ configurable service we will use the power of
 the [Service container](https://laravel.com/docs/8.x/container#binding-basics).
 
 ```php
+namespace App\Providers;
+
 class AppServiceProvider extends ServiceProvider
 {
     public function register()
@@ -261,6 +272,8 @@ Finally, all we need to do is to read the `Provider` mail configuration
 and use it to instantiate our `custom.mailer` and then, use it to send the actual email.
 
 ```php
+namespace App\Notifications\Channels;
+
 class ProviderMailChannel extends MailChannel
 {
     public function send($notifiable, Notification $notification)
