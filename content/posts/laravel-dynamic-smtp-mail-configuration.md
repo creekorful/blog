@@ -226,12 +226,6 @@ class AppServiceProvider extends ServiceProvider
 {
     public function register()
     {
-        // When running in testing environment then return the mocked mail implementation
-        if (env('APP_ENV') === 'testing') {
-            $this->app->singleton('custom.mailer', MailFake::class);
-            return;
-        }
-
         // Register a custom mailer named `custom.mailer` that will receive his configuration dynamically
         $this->app->bind('custom.mailer', function ($app, $parameters) {
             $transport = new Swift_SmtpTransport($parameters['host'], $parameters['port']);
