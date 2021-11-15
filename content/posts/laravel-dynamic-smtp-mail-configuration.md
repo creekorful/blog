@@ -37,7 +37,7 @@ MAIL_FROM_ADDRESS=no-reply@example.org
 MAIL_FROM_NAME=Demo App
 ```
 
-> Note: The initial setup only requires these environment variables because the smtp mailer is already configured in `config/mail.php`.
+> Note: The initial setup only requires these environment variables because the smtp mailer is already configured by default in `config/mail.php`.
 
 ## 1.2. Creating an email
 
@@ -51,7 +51,7 @@ This command will generate a sample email in `app/Mail/Greetings` and you'll jus
 
 ## 1.3. Sending an email
 
-Sending an email to a user with Laravel can be either done:
+Sending an email to a user with Laravel can be either done
 
 - using `\Illuminate\Notifications\RoutesNotifications::notify`:
 
@@ -77,7 +77,7 @@ Eh! What if we need to 'whitelabelize' our application. :-)
 
 In our scenario, we have the need to [whitelabelize](https://en.wikipedia.org/wiki/White-label_product) our application:
 each `User` will belongs to a `Provider` that will have custom SMTP settings. So when sending email to a user we need to
-configure dynamically the mailer to use the SMTP credentials of `$user->provider`.
+configure dynamically the mailer to use the SMTP credentials of his provider (`$user->provider`).
 
 **Can Laravel help us doing so?**
 
@@ -129,13 +129,28 @@ class Provider extends Model
 }
 ```
 
-The `Provider` model has many `Users` and has a `mail_configuration` field which is encrypted and that will contain
-the SMTP credentials.
+The `Provider` model has many `Users` and has a `mail_configuration` field which is encrypted and that will contain the
+SMTP credentials.
+
+The email configuration will be stored as an [encrypted](https://laravel.com/docs/8.x/encryption) JSON configuration. It
+will look like this:
+
+```json
+{
+  "host": "smtp.example.org",
+  "port": 587,
+  "username": "foo",
+  "password": "bar",
+  "encryption": "tls",
+  "from_address": "no-reply@example.org",
+  "from_name": "Example"
+}
+```
 
 ## 2.2. Digging down the internals
 
-Now that our models are ready, we must find a way to use the provider configuration to send the email. Let's dig down
-in Laravel source code to understand how emails works:
+Now that our models are ready, we must find a way to use the provider configuration to send the email. Let's dig down in
+Laravel source code to understand how emails works:
 
 Remember the two-ways of sending emails?
 
@@ -234,7 +249,7 @@ class AppServiceProvider extends ServiceProvider
             $transport->setEncryption($parameters['encryption']);
     
             $mailer = new Mailer('', $app->get('view'), new Swift_Mailer($transport), $app->get('events'));
-            $mailer->alwaysFrom($from_address, $from_name);
+            $mailer->alwaysFrom($parameters['from_address'], $parameters['from_name']);
     
             return $mailer;
         });

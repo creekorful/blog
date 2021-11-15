@@ -116,7 +116,7 @@ This query will basically generate a single update to bump the roles.updated_at 
 update roles set roles.updated_at = now() where roles.id in (1, 2, 3)
 ```
 
-will be executed. (in this example the user has the role 1, 2 and 3 affected)
+Will be executed. (in this example the user has the role 1, 2 and 3 affected)
 
 ### And the problem?
 
@@ -132,7 +132,9 @@ This limit in MySQL is currently at
 The way we have handled this situation was simply by not using `$touches`, and manually doing the touches chunk by chunk
 on the roles to not reach the limit.
 
-I have chosen to use [listeners](https://laravel.com/docs/8.x/events#registering-events-and-listeners) for that.
+I have chosen to use [listeners](https://laravel.com/docs/8.x/events#registering-events-and-listeners) for that. The
+idea behind listeners is really simple: each time a model is _created_, _updated_, _saved_, _deleted_, an event is
+dispatched, and you can react on it by writing special listener.
 
 ### Define the UserSaved event
 
@@ -148,7 +150,7 @@ and then references it in the model:
 namespace App\Models;
 
 /**
- * @property Collection<Child> $childs
+ * @property Collection<Role> $roles
  */
 class User extends Model
 {
@@ -180,7 +182,8 @@ class UserListener
 {
     public function handleUserSaved(UserSaved $event)
     {
-        // Manually touches roles
+        // Take roles ids by batch of 1000 and run a single SQL query
+        // to bump updated_at.
         $event->user->roles()->chunk(1000, function (Collection $role) {
             Role::whereIn('id', $role->pluck('id'))->update(['updated_at' => Carbon::now()]);
         });
@@ -199,8 +202,8 @@ I have raised an [issue](https://github.com/laravel/framework/issues/39259) to l
 After a bit of discussion it has come up that fixing the framework may not be the best thing to do since this use-case
 is quite rare and the fix is a bit opinionated.
 
-Therefore, opening a [PR](https://github.com/laravel/docs/pull/7373) in laravel/docs to mention the technical limits
-of `$touches`
+Therefore, opening a [pull request](https://github.com/laravel/docs/pull/7373) in laravel/docs to mention the technical
+limits of `$touches`
 was the logical follow-up to do. Sadly, the PR was rejected without taking time to think about it.
 
 I must say I'm a bit disappointed of how the situation has ended, but... *meh*.
